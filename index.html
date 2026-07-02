@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>李啟誠｜我正在猴叫</title>
+<title>李啟誠｜嗨，我正在猴叫</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
@@ -138,6 +138,14 @@
   }
   .btn-photo:hover{background:rgba(27,122,140,0.18); transform:translateY(-3px);}
   .btn-photo.is-active{background:var(--teal); border-color:var(--teal); box-shadow:0 10px 24px rgba(27,122,140,0.4);}
+
+  .btn-egg{
+    background:transparent;
+    color:var(--white);
+    border:2px dashed rgba(243,234,216,0.5);
+  }
+  .btn-egg:hover{background:rgba(243,234,216,0.1); transform:translateY(-3px);}
+  .btn-egg.is-active{background:var(--sand-2); border-color:var(--sand-2); color:var(--ink);}
 
   .pulse-dot{
     width:8px;height:8px;border-radius:50%;
@@ -286,7 +294,8 @@
 
   <div class="eyebrow">正在猴叫中</div>
   <h1 class="name">李啟誠</h1>
-  <p class="role">高中生，戴著黑框眼鏡、一臉智障，嘴別人的速度超快。<br>按下下面兩個鍵，聽他自己在講甚麼屌，或看他長什麼雞巴樣子。</p>
+  <p class="role">高中生，戴著黑框眼鏡、一臉智障，嘴別人的速度超快。
+按下下面兩個鍵，聽他自己在講甚麼屌，或看他長什麼雞巴樣子。</p>
 
   <div class="deck">
     <button class="btn btn-talk" id="talkBtn">
@@ -295,7 +304,7 @@
           <path d="M4 5h16v10H8l-4 4V5z" fill="currentColor" opacity="0.95"/>
         </svg>
       </span>
-      自我猴叫
+      啟程猴叫
       <span class="pulse-dot" aria-hidden="true"></span>
     </button>
 
@@ -307,21 +316,30 @@
           <path d="M8 6l1.5-2.5h5L16 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </span>
-        口交照片
+      A片
+    </button>
+
+    <button class="btn btn-egg" id="eggBtn">
+      <span class="ico" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3c-3 3-5 7-5 10a5 5 0 0010 0c0-3-2-7-5-10z" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </span>
+      小彩蛋
     </button>
   </div>
 
   <div class="bubble-wrap" id="bubbleWrap">
     <div class="bubble">
-      <h2>嗨，我是李猴子</h2>
+      <h2>嗨，我是猴子</h2>
       <p>我她媽是個智障啟智兒。</p>
       <p>我她還是個愛亂叫的猴子，爆mic王第一個，我cs薑餅人</p>
       <p>個性低能、反應慢，喜歡把想法丟到馬桶，也喜歡吃別人的屎，隨時歡迎找我。</p>
       <div class="tag-row">
         <span class="tag">智障</span>
-        <span class="tag">腦殘</span>
-        <span class="tag">低能</span>
         <span class="tag">超糖</span>
+        <span class="tag">低能</span>
+        <span class="tag">腦殘</span>
       </div>
     </div>
   </div>
@@ -329,13 +347,20 @@
   <div class="photo-wrap" id="photoWrap">
     <figure class="polaroid">
       <img src="likaicheng.png" alt="李啟誠正在說話的照片">
-      <figcaption>李啟誠口交</figcaption>
+      <figcaption>李啟誠・猴叫到一半</figcaption>
+    </figure>
+  </div>
+
+  <div class="photo-wrap" id="eggWrap">
+    <figure class="polaroid">
+      <img src="5.jpg" alt="彩蛋照片：戴著耳機大笑的長輩">
+      <figcaption>彩蛋・聽到什麼好笑的事</figcaption>
     </figure>
   </div>
 
   <div class="foot">
-    <span>李啟誠｜個人猴叫網頁</span>
-    <span id="statusText">狀態：等待口交</span>
+    <span>李啟誠｜個人口交介面</span>
+    <span id="statusText">狀態：等待狗叫</span>
   </div>
 
 </div>
@@ -351,7 +376,7 @@
     const willOpen = !bubbleWrap.classList.contains('open');
     bubbleWrap.classList.toggle('open');
     talkBtn.classList.toggle('is-active', willOpen);
-    statusText.textContent = willOpen ? '狀態：李啟誠正在猴叫中' : '狀態：等待猴叫';
+    statusText.textContent = willOpen ? '狀態：李啟誠正在自我介紹' : '狀態：等待互動';
   });
 
   photoBtn.addEventListener('click', () => {
@@ -360,8 +385,22 @@
     photoBtn.classList.toggle('is-active', willOpen);
     if(willOpen){
       statusText.textContent = '狀態：正在顯示李啟誠的照片';
-    } else if(!bubbleWrap.classList.contains('open')){
-      statusText.textContent = '狀態：等待猴叫';
+    } else if(!bubbleWrap.classList.contains('open') && !eggWrap.classList.contains('open')){
+      statusText.textContent = '狀態：等待互動';
+    }
+  });
+
+  const eggBtn = document.getElementById('eggBtn');
+  const eggWrap = document.getElementById('eggWrap');
+
+  eggBtn.addEventListener('click', () => {
+    const willOpen = !eggWrap.classList.contains('open');
+    eggWrap.classList.toggle('open');
+    eggBtn.classList.toggle('is-active', willOpen);
+    if(willOpen){
+      statusText.textContent = '狀態：找到彩蛋了';
+    } else if(!bubbleWrap.classList.contains('open') && !photoWrap.classList.contains('open')){
+      statusText.textContent = '狀態：等待互動';
     }
   });
 </script>
