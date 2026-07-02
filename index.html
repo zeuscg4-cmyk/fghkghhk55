@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李啟誠｜嗨，我正在說話</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1D2220;
+    --ink-soft:#2B322F;
+    --teal:#1B7A8C;
+    --teal-deep:#125A68;
+    --sand:#F3EAD8;
+    --sand-2:#EADFC6;
+    --coral:#E8734A;
+    --coral-deep:#C85A34;
+    --white:#FFF9EF;
+    --line:rgba(29,34,32,0.14);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+
+  body{
+    background:
+      radial-gradient(ellipse at 15% -10%, rgba(27,122,140,0.25), transparent 55%),
+      radial-gradient(ellipse at 100% 110%, rgba(232,115,74,0.18), transparent 50%),
+      var(--ink);
+    color:var(--white);
+    font-family:"Noto Sans TC","Baloo 2",sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .stage{
+    max-width:920px;
+    margin:0 auto;
+    padding:56px 24px 96px;
+    position:relative;
+  }
+
+  .eyebrow{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:"Baloo 2",sans-serif;
+    font-weight:700;
+    letter-spacing:.14em;
+    font-size:13px;
+    color:var(--teal);
+    text-transform:uppercase;
+    opacity:0;
+    animation:riseIn .7s ease forwards;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px;height:2px;
+    background:var(--teal);
+    display:inline-block;
+  }
+
+  h1.name{
+    font-family:"Baloo 2",sans-serif;
+    font-weight:800;
+    font-size:clamp(52px,10vw,104px);
+    line-height:.95;
+    margin:14px 0 6px;
+    letter-spacing:.01em;
+    background:linear-gradient(100deg,var(--white) 40%,var(--sand-2) 60%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:var(--white);
+    opacity:0;
+    animation:riseIn .8s .08s ease forwards;
+  }
+
+  .role{
+    font-size:clamp(16px,3vw,20px);
+    color:var(--sand-2);
+    font-weight:500;
+    max-width:520px;
+    line-height:1.7;
+    opacity:0;
+    animation:riseIn .8s .18s ease forwards;
+  }
+  .role b{color:var(--coral);font-weight:700;}
+
+  @keyframes riseIn{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  .deck{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-top:44px;
+    opacity:0;
+    animation:riseIn .8s .3s ease forwards;
+  }
+
+  .btn{
+    appearance:none;
+    border:none;
+    cursor:pointer;
+    font-family:"Baloo 2",sans-serif;
+    font-weight:700;
+    font-size:17px;
+    padding:18px 28px;
+    border-radius:999px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, background .25s ease;
+    position:relative;
+  }
+  .btn:focus-visible{outline:3px solid var(--sand); outline-offset:3px;}
+  .btn:active{transform:scale(.97);}
+
+  .btn-talk{
+    background:var(--coral);
+    color:var(--white);
+    box-shadow:0 10px 24px rgba(232,115,74,0.35);
+  }
+  .btn-talk:hover{transform:translateY(-3px); box-shadow:0 14px 30px rgba(232,115,74,0.45);}
+  .btn-talk .ico{
+    width:26px;height:26px;
+    display:grid;place-items:center;
+  }
+
+  .btn-photo{
+    background:transparent;
+    color:var(--white);
+    border:2px solid var(--teal);
+  }
+  .btn-photo:hover{background:rgba(27,122,140,0.18); transform:translateY(-3px);}
+  .btn-photo.is-active{background:var(--teal); border-color:var(--teal); box-shadow:0 10px 24px rgba(27,122,140,0.4);}
+
+  .pulse-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--white);
+    animation:pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1; transform:scale(1);}
+    50%{opacity:.35; transform:scale(.7);}
+  }
+
+  .bubble-wrap{
+    margin-top:34px;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .55s cubic-bezier(.2,.8,.2,1);
+  }
+  .bubble-wrap.open{max-height:900px;}
+
+  .bubble{
+    background:var(--sand);
+    color:var(--ink);
+    border-radius:26px;
+    padding:34px 34px 30px;
+    position:relative;
+    transform:scale(.94) translateY(10px);
+    opacity:0;
+    transition:transform .5s cubic-bezier(.2,.8,.2,1), opacity .5s ease;
+    box-shadow:0 20px 45px rgba(0,0,0,0.35);
+  }
+  .bubble-wrap.open .bubble{transform:scale(1) translateY(0); opacity:1;}
+
+  .bubble::before{
+    content:"";
+    position:absolute;
+    top:-16px; left:46px;
+    width:32px;height:32px;
+    background:var(--sand);
+    border-radius:8px 0 0 0;
+    transform:rotate(45deg);
+  }
+
+  .bubble h2{
+    font-family:"Baloo 2",sans-serif;
+    font-size:22px;
+    margin:0 0 14px;
+    color:var(--teal-deep);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .bubble h2::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  .bubble p{
+    font-size:16px;
+    line-height:1.95;
+    margin:0 0 14px;
+  }
+  .bubble p:last-child{margin-bottom:0;}
+  .bubble .tag-row{
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin-top:18px;
+  }
+  .tag{
+    font-size:13px;
+    font-weight:700;
+    padding:7px 14px;
+    border-radius:999px;
+    background:var(--teal);
+    color:var(--white);
+    font-family:"Baloo 2",sans-serif;
+  }
+  .tag:nth-child(2n){background:var(--coral);}
+
+  .photo-wrap{
+    margin-top:24px;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .6s cubic-bezier(.2,.8,.2,1);
+  }
+  .photo-wrap.open{max-height:900px;}
+
+  .polaroid{
+    background:var(--white);
+    padding:16px 16px 60px;
+    border-radius:6px;
+    max-width:360px;
+    margin:10px auto 0;
+    box-shadow:0 25px 50px rgba(0,0,0,0.45);
+    transform:rotate(-4deg) scale(.9) translateY(14px);
+    opacity:0;
+    transition:transform .6s cubic-bezier(.2,.8,.2,1), opacity .6s ease;
+    position:relative;
+  }
+  .photo-wrap.open .polaroid{
+    transform:rotate(-2.5deg) scale(1) translateY(0);
+    opacity:1;
+  }
+  .polaroid img{
+    display:block;
+    width:100%;
+    border-radius:2px;
+    filter:grayscale(0.05) contrast(1.03);
+  }
+  .polaroid figcaption{
+    position:absolute;
+    bottom:16px; left:16px; right:16px;
+    font-family:"Baloo 2",sans-serif;
+    font-weight:700;
+    color:var(--ink-soft);
+    font-size:15px;
+    text-align:center;
+  }
+
+  .foot{
+    margin-top:70px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:13px;
+    color:rgba(243,234,216,0.55);
+    border-top:1px solid var(--line);
+    padding-top:18px;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  @media (max-width:520px){
+    .deck{flex-direction:column;}
+    .btn{width:100%; justify-content:center;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important; transition-duration:.01ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+
+  <div class="eyebrow">正在發言中</div>
+  <h1 class="name">李啟誠</h1>
+  <p class="role">高中生，戴著黑框眼鏡、一臉智障，嘴別人的速度超快。<br>按下下面兩個鍵，聽他自己說，或看他長什麼樣子。</p>
+
+  <div class="deck">
+    <button class="btn btn-talk" id="talkBtn">
+      <span class="ico" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M4 5h16v10H8l-4 4V5z" fill="currentColor" opacity="0.95"/>
+        </svg>
+      </span>
+      自我介紹
+      <span class="pulse-dot" aria-hidden="true"></span>
+    </button>
+
+    <button class="btn btn-photo" id="photoBtn">
+      <span class="ico" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="6" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="2"/>
+          <path d="M8 6l1.5-2.5h5L16 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      看照片
+    </button>
+  </div>
+
+  <div class="bubble-wrap" id="bubbleWrap">
+    <div class="bubble">
+      <h2>嗨，我是李啟誠</h2>
+      <p>我她媽是個智障啟智兒。</p>
+      <p>我她還是個愛亂叫的猴子，爆mic王第一個，我cs薑餅人</p>
+      <p>個性低能、反應慢，喜歡把想法丟到馬桶，也喜歡吃別人的屎，隨時歡迎找我。</p>
+      <div class="tag-row">
+        <span class="tag">智障</span>
+        <span class="tag">腦殘</span>
+        <span class="tag">低能</span>
+        <span class="tag">超糖</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="photo-wrap" id="photoWrap">
+    <figure class="polaroid">
+      <img src="likaicheng.png" alt="李啟誠正在說話的照片">
+      <figcaption>李啟誠口交</figcaption>
+    </figure>
+  </div>
+
+  <div class="foot">
+    <span>李啟誠｜個人介紹頁</span>
+    <span id="statusText">狀態：等待口交</span>
+  </div>
+
+</div>
+
+<script>
+  const talkBtn = document.getElementById('talkBtn');
+  const photoBtn = document.getElementById('photoBtn');
+  const bubbleWrap = document.getElementById('bubbleWrap');
+  const photoWrap = document.getElementById('photoWrap');
+  const statusText = document.getElementById('statusText');
+
+  talkBtn.addEventListener('click', () => {
+    const willOpen = !bubbleWrap.classList.contains('open');
+    bubbleWrap.classList.toggle('open');
+    talkBtn.classList.toggle('is-active', willOpen);
+    statusText.textContent = willOpen ? '狀態：李啟誠正在自我介紹' : '狀態：等待互動';
+  });
+
+  photoBtn.addEventListener('click', () => {
+    const willOpen = !photoWrap.classList.contains('open');
+    photoWrap.classList.toggle('open');
+    photoBtn.classList.toggle('is-active', willOpen);
+    if(willOpen){
+      statusText.textContent = '狀態：正在顯示李啟誠的照片';
+    } else if(!bubbleWrap.classList.contains('open')){
+      statusText.textContent = '狀態：等待互動';
+    }
+  });
+</script>
+
+</body>
+</html>
