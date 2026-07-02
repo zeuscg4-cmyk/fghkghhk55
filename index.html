@@ -284,7 +284,7 @@
 
 <div class="stage">
 
-  <div class="eyebrow">正在發言中</div>
+  <div class="eyebrow">正在猴叫中</div>
   <h1 class="name">李啟誠</h1>
   <p class="role">高中生，戴著黑框眼鏡、一臉智障，嘴別人的速度超快。<br>按下下面兩個鍵，聽他自己說，或看他長什麼樣子。</p>
 
@@ -313,7 +313,7 @@
 
   <div class="bubble-wrap" id="bubbleWrap">
     <div class="bubble">
-      <h2>嗨，我是李啟誠</h2>
+      <h2>嗨，我是李猴子</h2>
       <p>我她媽是個智障啟智兒。</p>
       <p>我她還是個愛亂叫的猴子，爆mic王第一個，我cs薑餅人</p>
       <p>個性低能、反應慢，喜歡把想法丟到馬桶，也喜歡吃別人的屎，隨時歡迎找我。</p>
@@ -334,7 +334,7 @@
   </div>
 
   <div class="foot">
-    <span>李啟誠｜個人介紹頁</span>
+    <span>李啟誠｜個人猴叫網頁</span>
     <span id="statusText">狀態：等待口交</span>
   </div>
 
@@ -351,7 +351,7 @@
     const willOpen = !bubbleWrap.classList.contains('open');
     bubbleWrap.classList.toggle('open');
     talkBtn.classList.toggle('is-active', willOpen);
-    statusText.textContent = willOpen ? '狀態：李啟誠正在自我介紹' : '狀態：等待互動';
+    statusText.textContent = willOpen ? '狀態：李啟誠正在猴叫中' : '狀態：等待猴叫';
   });
 
   photoBtn.addEventListener('click', () => {
@@ -361,7 +361,7 @@
     if(willOpen){
       statusText.textContent = '狀態：正在顯示李啟誠的照片';
     } else if(!bubbleWrap.classList.contains('open')){
-      statusText.textContent = '狀態：等待互動';
+      statusText.textContent = '狀態：等待猴叫';
     }
   });
 </script>
